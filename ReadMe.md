@@ -33,23 +33,22 @@ Because the ints.txt file is so large and the mysql_query was having issues with
 	-All VOR / NDB correctly labeled
 	-Intersections all go in instead of hanging up
 
--------------------------------
-
 Installation (On Web Server):
-	1.	Go to phpMyAdmin or similar and enter your database
-	2.	Find the table phpVMS_navdata
-	3.	Go to the operations tab
-	4.	Rename Table To `vms_navdata` (without the `)
-	5.	Obtain the latest fsbuild AIRAC
-	6.	Rename it FSBUILD2.exe
-	7.	Place this .exe file in the navdata/fsbuild folder
-	8.	Run the installer
-	9. 	You should now have three (3) files
-			awys.txt
-	    		navs.txt
-	    		ints.txt
-		
-	    Move all other files to another folder
+-------------------------------
+		1.	Go to phpMyAdmin or similar and enter your database
+		2.	Find the table phpVMS_navdata
+		3.	Go to the operations tab
+		4.	Rename Table To `vms_navdata` (without the `)
+		5.	Obtain the latest fsbuild AIRAC
+		6.	Rename it FSBUILD2.exe
+		7.	Place this .exe file in the navdata/fsbuild folder
+		8.	Run the installer
+		9. 	You should now have three (3) files
+				awys.txt
+		    		navs.txt
+		    		ints.txt
+			
+		 Move all other files to another folder
 	10. Search for CMD (or Terminal on Mac) and run it as administrator
 	11. Copy and paste the following (assuming that your phpvms installation is in C://xampp/htdocs/phpvms or C://wamp/www/phpvms)
 				
@@ -87,5 +86,4 @@ Installation (On Web Server):
 	)
 	If that doesn't work, then google is your best friend!
     
--------------------------------      
 13. It should've been successfully updated.
