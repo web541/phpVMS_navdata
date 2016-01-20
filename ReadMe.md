@@ -44,7 +44,7 @@ Installation (On Web Server):
 		7.	Place this .exe file in the navdata/fsbuild folder
 		8.	Run the installer
 		9. 	You should now have three (3) files
-				awys.txt
+					awys.txt
 		    		navs.txt
 		    		ints.txt
 			
