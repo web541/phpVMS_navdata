@@ -1,5 +1,4 @@
 <?php
-ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
 
 include dirname(__FILE__).'/db.php';
 
@@ -110,7 +109,7 @@ while ($line = fscanf($handle, "%s %s %s %s %s %s\n"))  {
                 //exit;
         }
         
-	$title = mysql_real_escape_string($title);
+	$title = mysql_escape_string($title);
 
     $type = NAV_FIX;
 	
@@ -167,7 +166,7 @@ while ($lineinfo = fscanf($handle, "%s %s %s %s %s %s %s\n"))  {
 	
 
                 
-	    $title = mysql_real_escape_string($title);
+	    $title = mysql_escape_string($title);
       
         $type = NAV_VOR;
 		
@@ -246,7 +245,7 @@ while ($lineinfo = fscanf($handle, "%s %s %s %s %s %s %s\n"))  {
 		$test = "VOR";
         if($type == $test)continue;
               
-	    $title = mysql_real_escape_string($title);
+	    $title = mysql_escape_string($title);
       
         $type = NAV_NDB;
 		
@@ -300,75 +299,5 @@ mysql_query($sql.$values);
 fclose($handle);
 
 echo "{$total} NDBs added, {$updated} updated\n";
-
-// Load intersections
-echo "Loading INTs...";
-
-
-
-$total = 0;
-$updated = 0;
-$chunks = 3000;
-$updated_list = array();
-
-$list2 = array();
-
-
-$sql = "INSERT INTO phpvms_navdata (name, title, loc, lat, lng, type) VALUES ";
-
-$handle = fopen("fsbuild/ints.txt", "r");
-while ($lineinfo2 = fscanf($handle, "%s %s %s %s %s\n"))  {
-        if($lineinfo2[0][0] == ';') {
-                continue;
-        }
-        
-        list ($name, $title, $lat, $lng, $type) = $lineinfo2;
-
-                
-	    $title = mysql_real_escape_string($title);
-      
-        $type = NAV_FIX;
-        
-        $res = mysql_query("SELECT id FROM phpvms_navdata WHERE `name`='{$name}'");
-        if(mysql_num_rows($res) > 0) {
-
-                
-              
-                $updated ++;
-                continue;
-        } else { 
-                //echo "adding {$name}\n";
-                $loc = get_earth_location($lat, $lng);
-			
-                $list2[] = "('{$name}', '{$title}', '{$loc}', '{$lat}', '{$lng}', '{$type}')";
-        }
-        
-        if($total == $chunks) {
-                $values = implode(',', $list2);
-                $list2 = array();
-
-                mysql_query($sql.$values);
-
-                if(mysql_errno() != 0) {
-                        echo "============\n".mysql_error()."\n==========\n";
-                        die();
-                }
-
-                $chunks += $chunks;
-        }
-        
-        $total ++;
-}
-
-$values = implode(',', $list2);
-mysql_query($sql.$values);
-
-fclose($handle);
-
-echo "{$total} INTs added, {$updated} bypassed already in DB\n";
-
-
-
-
 
 echo "Completed!\n";
