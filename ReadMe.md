@@ -16,8 +16,8 @@ NOTE: This script requires the table phpvms_navdata to be in your sql database, 
 -Intersections all go in instead of hanging up
 
 -------------------------------
-
 Installation (On Web Server):
+-------------------------------
 	1.	Go to phpMyAdmin or similar and enter your database
 	2.	Find the table phpVMS_navdata
 	3.	Go to the operations tab
